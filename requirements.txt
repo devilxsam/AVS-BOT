@@ -1,0 +1,5 @@
+asyncio
+python-telegram-bot
+pydub
+opencv-python
+telethon
