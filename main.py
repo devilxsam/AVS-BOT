@@ -184,7 +184,7 @@ async def process_command_queue():
 
         try:
             channel_id = PRIVATE_CHANNEL_ID
-            message_id = random.randint(1, 2458)
+            message_id = random.randint(1, TOTAL_FILES)
 
             retries = 3
             for attempt in range(retries):
