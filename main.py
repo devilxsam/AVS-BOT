@@ -108,7 +108,7 @@ async def broadcast(event):
         print(f"Error in /broadcast command: {e}")
         await event.reply(BROADCAST_ERROR_MESSAGE)
 
-@bot.on(events.NewMessage(pattern="/get_random_media$", incoming=True, outgoing=False))
+@bot.on(events.NewMessage(pattern="/RAVS$", incoming=True, outgoing=False))
 async def get_random_media(event):
     try:
         user_id = event.sender_id

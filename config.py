@@ -24,7 +24,7 @@ ADMIN_USER_ID = 6271019610  # Replace with your admin user ID
 TOTAL_FILES = 2494
 
 # Messages
-START_MESSAGE = "Hello! I am Terabox Video Downloader Bot. Send me '/get_random_media' to receive a random media file from the private channel."
+START_MESSAGE = "𝐇𝐞𝐥𝐥𝐨!\n\n𝐈 𝐚𝐦 𝐀𝐝𝐮𝐥𝐭 𝐕𝐢𝐝𝐞𝐨 𝐒𝐞𝐧𝐝𝐞𝐫 𝐁𝐨𝐭.\n\n𝐒𝐞𝐧𝐝 𝐦𝐞 '/RAVS' 𝐭𝐨 𝐑𝐞𝐜𝐞𝐢𝐯𝐞 𝐚 𝐑𝐚𝐧𝐝𝐨𝐦 𝐕𝐢𝐝𝐞𝐨\n\n𝐒𝐡𝐚𝐫𝐞 𝐓𝐡𝐢𝐬 𝐁𝐨𝐭 𝐭𝐨 𝐘𝐨𝐮𝐫 𝐅𝐫𝐢𝐞𝐧𝐝𝐬 ❤️\n\n𝐓𝐄𝐀𝐌 : @TADxBotz"
 
 PLEASEWAIT_MESSAGE = "𝘗𝘭𝘦𝘢𝘴𝘦 𝘸𝘢𝘪𝘵, 𝘵𝘩𝘦 𝘷𝘪𝘥𝘦𝘰 𝘪𝘴 𝘣𝘦𝘪𝘯𝘨 𝘱𝘳𝘰𝘤𝘦𝘴𝘴𝘦𝘥. 𝘛𝘩𝘪𝘴 𝘮𝘢𝘺 𝘵𝘢𝘬𝘦 𝘢 𝘮𝘰𝘮𝘦𝘯𝘵."
 
