@@ -7,6 +7,7 @@ import os
 import cv2
 from telethon import TelegramClient, events, types
 from telethon.errors import TimedOutError
+import subprocess
 
 # Import configurations from config.py
 from config import *
@@ -57,29 +58,6 @@ async def start(event):
 
     except Exception as e:
         print(f"Error in /start command: {e}")
-        await event.reply("An error occurred. Please try again later.")
-
-@bot.on(events.NewMessage(pattern="/get_random_media$", incoming=True, outgoing=False))
-async def get_random_media(event):
-    try:
-        user_id = event.sender_id
-
-        if user_id in user_video_processing and user_video_processing[user_id]:
-            raise ValueError(PROCESSING_MESSAGE)
-
-        # Set flag to indicate video processing
-        user_video_processing[user_id] = True
-
-        # Enqueue the command request
-        await command_queue.put((event, user_id))
-
-        # Inform the user that the video is being sent
-        await event.reply(PROCESSING_MESSAGE)
-
-    except ValueError as ve:
-        await event.reply(str(ve))
-    except Exception as e:
-        print(f"Error getting or sending random media: {e}")
         await event.reply("An error occurred. Please try again later.")
 
 @bot.on(
@@ -136,7 +114,7 @@ async def get_random_media(event):
         user_id = event.sender_id
 
         if user_id in user_video_processing and user_video_processing[user_id]:
-            raise ValueError("Video is currently being processed. Please wait for it to be sent before using the command again.")
+            raise ValueError(PROCESSING_MESSAGE)
 
         # Set flag to indicate video processing
         user_video_processing[user_id] = True
@@ -145,7 +123,7 @@ async def get_random_media(event):
         await command_queue.put((event, user_id))
 
         # Inform the user that the video is being sent
-        await event.reply("Please wait, the video is being sent. This may take a moment.")
+        await event.reply(PLEASEWAIT_MESSAGE)
 
     except ValueError as ve:
         await event.reply(str(ve))
@@ -231,6 +209,41 @@ async def download_and_send_media(event, media_message):
     except Exception as e:
         print(f"Error sending media to user: {e}")
         await event.reply("An error occurred while sending media. Please try again later.")
+
+# Update the /totalvideo command to change TOTAL_FILES in config.py
+@bot.on(events.NewMessage(pattern="/totalvideo", incoming=True, outgoing=False))
+async def update_total_files(event):
+    try:
+        if event.sender_id != ADMIN_USER_ID:
+            await event.reply(UNAUTHORIZED_ERROR_MESSAGE)
+            return
+
+        _, *value_args = event.message.text.split(" ", 1)
+        new_total_files = int(value_args[0]) if value_args else None
+
+        if new_total_files is not None:
+            # Update the TOTAL_FILES in config.py
+            with open("config.py", "r", encoding="utf-8") as config_file:
+                config_lines = config_file.readlines()
+
+            with open("config.py", "w", encoding="utf-8") as config_file:
+                for line in config_lines:
+                    if "TOTAL_FILES" in line:
+                        config_file.write(f'TOTAL_FILES = {new_total_files}\n')
+                    else:
+                        config_file.write(line)
+
+            # Restart the bot using subprocess
+            subprocess.run(["python", "main.py"])
+
+            await event.reply(f"Total files updated to {new_total_files}. Bot is restarting...")
+
+        else:
+            await event.reply("Invalid command format. Please use /totalvideo {value}")
+
+    except Exception as e:
+        print(f"Error in /totalvideo command: {e}")
+        await event.reply("An error occurred. Please try again later.")      
 
 def generate_thumbnail(video_path, output_path='thumbnail.jpg'):
     try:
