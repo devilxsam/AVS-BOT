@@ -21,7 +21,7 @@ USER_DATA_JSON_FILE = "user_data_list.json"  # Path to the JSON file to store us
 # Admin user ID
 ADMIN_USER_ID = 6271019610  # Replace with your admin user ID
 
-TOTAL_FILES = "2458"
+TOTAL_FILES = 2485
 
 # Messages
 START_MESSAGE = "Hello! I am Terabox Video Downloader Bot. Send me '/get_random_media' to receive a random media file from the private channel."
